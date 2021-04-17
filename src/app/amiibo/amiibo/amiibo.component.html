@@ -1,0 +1,28 @@
+<div class="main">
+  <strong><h3 style="color: white">¡BUSCA UN AMIIBO!</h3></strong>
+  <input type="text" id="nombreAmiibo" name="nombre" style="font-size: larger;color: white;background-color: teal;" required/>
+  <button class="btn-warning" (click)="send()" style="font-size: x-large; height:40px; width: 20%;">
+    Enviar
+  </button>
+
+  <!--A partir de aquí se despliega la información de los amiibos-->
+  <div class="response" *ngFor="let amiibo of apiResponse.amiibo"  style="color:white;">
+    <p>Respuesta:</p>
+    <!--Personaje del Amiibo-->
+    <p>{{amiibo.character}}</p>
+    <!--Imagen del amiibo-->
+    <div>
+      <img src="{{amiibo.image}}">
+    </div>
+    <!--Nombre del amiibo-->
+    <p>{{amiibo.name}}</p>
+    <!--Serie del amiibo-->
+    <p>{{amiibo.amiiboSeries}}</p>
+    <!--Fecha de lanzamiento-->
+    <p>{{amiibo.release.au}}</p>
+    <p>{{amiibo.release.eu}}</p>
+    <p>{{amiibo.release.jp}}</p>
+    <p>{{amiibo.release.na}}</p>
+  </div>
+
+</div>
