@@ -42,6 +42,15 @@ export class AmiiboComponent implements OnInit {
     console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?name=${this.urlApi}`);
   }
 
+  callApiAll(){
+    fetch(`https://www.amiiboapi.com/api/amiibo/`).then(response => response.json())
+    .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
+      this.apiResponse=data;
+    });
+    console.log("callApi dice: Se llamó a la api");
+    console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/`);
+  }
+
   send(){
     var nombre = (<HTMLInputElement>document.getElementById("nombreAmiibo")).value;
     this.urlApi = nombre;
@@ -50,4 +59,7 @@ export class AmiiboComponent implements OnInit {
     console.log(`send dice: Url= ${this.urlApi}`);
   }
 
+  sendAll(){
+    this.callApiAll();
+  }
 }
