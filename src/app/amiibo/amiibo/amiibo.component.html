@@ -15,8 +15,15 @@
     <br>
   </div>
 </div>
+
+<!-- <div  *ngIf="processing">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div> -->
+
   <!--A partir de aquí se despliega la información de los amiibos-->
-  <div class="centro">
+  <div *ngIf="show" class="centro">
   <div class="response" *ngFor="let amiibo of apiResponse.amiibo"  style="color:white;">
     <!--Personaje del Amiibo-->
     <p><b>Personaje: </b>{{amiibo.character}}</p>
