@@ -1,6 +1,8 @@
 <div class="main">
-  <div class="centro"><strong><h3 style="color: white">¡BUSCA UN AMIIBO!</h3></strong>
-    <input type="text" id="nombreAmiibo" name="nombre" style="font-size: larger;" required placeholder="Escribe un nombre"/>
+  <div class="centro"><strong>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nintendo_gray_logo.svg/1280px-Nintendo_gray_logo.svg.png" alt="nintendo_logo" height="95px" style="margin-top:20px;margin-bottom:10px">
+    <h3 style="color: white; font-size: 48px; margin-bottom:10px">¡BUSCA UN AMIIBO!</h3></strong>
+    <input class="form-control" type="text" id="nombreAmiibo" name="nombre" style="font-size: larger; height: 40px; width:30%; margin-left: auto; margin-right: auto;" required placeholder="Escribe un nombre"/>
     <br><br>
     <!-- Este div sirve para separar los botones y que no se expanda el header negro -->
     <div style="color: white;">
@@ -21,9 +23,13 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div> -->
-
+  <div *ngIf="!isOk" class="notfound">
+    <p class="titulo404">4 0 4 - NOT FOUND</p>
+    <p>Intente con otro amiibo o revise si su nombre está bien escrito</p>
+  </div>
   <!--A partir de aquí se despliega la información de los amiibos-->
   <div *ngIf="show" class="centro">
+
   <div class="response" *ngFor="let amiibo of apiResponse.amiibo"  style="color:white;">
     <!--Personaje del Amiibo-->
     <p><b>Personaje: </b>{{amiibo.character}}</p>

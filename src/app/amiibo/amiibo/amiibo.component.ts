@@ -31,7 +31,7 @@ export class AmiiboComponent implements OnInit {
 
 
   show: boolean = false;
-
+  isOk:boolean = true;
 
 
   ngOnInit(){
@@ -42,13 +42,16 @@ export class AmiiboComponent implements OnInit {
     fetch(`https://www.amiiboapi.com/api/amiibo/?name=${this.urlApi}`).then(response => response.json())
     .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
       this.apiResponse=data;
+      if(data.amiibo==undefined)
+        this.isOk=false;
     }).catch(function(err) {
       console.error(err);
+      this.isOk = false;
     });
     console.log("callApi dice: Se llamó a la api");
     console.log(`callApi dice: nombre = ${this.urlApi}`);
     console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?name=${this.urlApi}`);
-    if(this.apiResponse==undefined) alert("No se encontro en valor");
+    // if(this.apiResponse==undefined || this.apiResponse==null) alert("No se encontró el Amiibo");
   }
 
   callApiAll(){
@@ -62,6 +65,7 @@ export class AmiiboComponent implements OnInit {
   }
 
   send(){
+    this.isOk=true;
     var nombre = (<HTMLInputElement>document.getElementById("nombreAmiibo")).value;
     this.urlApi = nombre;
    console.log("nombre: "+nombre);
@@ -82,6 +86,7 @@ export class AmiiboComponent implements OnInit {
   }
 
   sendAll(){
+    this.isOk=true;
     (<HTMLInputElement>document.getElementById("nombreAmiibo")).value="";
     this.callApiAll();
   }
