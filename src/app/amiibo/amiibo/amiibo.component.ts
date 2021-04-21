@@ -39,7 +39,7 @@ export class AmiiboComponent implements OnInit {
   }
 
   callApi(){
-    fetch(`https://www.amiiboapi.com/api/amiibo/?name=${this.urlApi}`).then(response => response.json())
+    fetch(`https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`).then(response => response.json())
     .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
       this.apiResponse=data;
       if(data.amiibo==undefined)
@@ -49,8 +49,8 @@ export class AmiiboComponent implements OnInit {
       this.isOk = false;
     });
     console.log("callApi dice: Se llamó a la api");
-    console.log(`callApi dice: nombre = ${this.urlApi}`);
-    console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?name=${this.urlApi}`);
+    console.log(`callApi dice: personaje = ${this.urlApi}`);
+    console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`);
     // if(this.apiResponse==undefined || this.apiResponse==null) alert("No se encontró el Amiibo");
   }
 
