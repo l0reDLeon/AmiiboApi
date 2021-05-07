@@ -1,53 +1,87 @@
 <div class="main">
-  <div class="centro"><strong>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nintendo_gray_logo.svg/1280px-Nintendo_gray_logo.svg.png" alt="nintendo_logo" height="95px" style="margin-top:20px;margin-bottom:10px">
-    <h3 style="color: white; font-size: 48px; margin-bottom:10px">¡BUSCA UN AMIIBO!</h3></strong>
-    <input class="form-control" type="text" id="nombreAmiibo" name="nombre" style="font-size: larger; height: 40px; width:30%; margin-left: auto; margin-right: auto;" required placeholder="Escribe un nombre"/>
-    <br><br>
+  <div class="centro">
+    <strong>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nintendo_gray_logo.svg/1280px-Nintendo_gray_logo.svg.png"
+        alt="nintendo_logo"
+        height="95px"
+        style="margin-top: 20px; margin-bottom: 10px"
+      />
+      <h3 style="color: white; font-size: 48px; margin-bottom: 10px">
+        ¡BUSCA UN AMIIBO!
+      </h3></strong
+    >
+    <input
+      class="form-control"
+      type="text"
+      id="nombreAmiibo"
+      name="nombre"
+      style="
+        font-size: larger;
+        height: 40px;
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+      "
+      required
+      placeholder="Escribe un nombre"
+    />
+    <br /><br />
+
     <!-- Este div sirve para separar los botones y que no se expanda el header negro -->
-    <div style="color: white;">
-      <button class="btn btn-outline-success" (click)="send()" style="font-size: x-large;">
-      Buscar Amiibo
+    <div style="color: white">
+      <button class="btn btn-outline-success" (click)="send()" style="font-size: x-large">
+        Buscar Amiibo
       </button>
       Ó
-      <button class="btn btn-outline-warning" (click)="sendAll()" style="font-size: x-large;">
+      <button
+        class="btn btn-outline-warning"
+        (click)="sendAll()"
+        style="font-size: x-large"
+      >
         Mostrar todos
       </button>
     </div>
-    <br>
+
+    <br />
   </div>
 </div>
 
-<!-- <div  *ngIf="processing">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div> -->
-  <div *ngIf="!isOk" class="notfound">
-    <p class="titulo404">4 0 4 - NOT FOUND</p>
-    <p>Intente con otro amiibo o revise si su nombre está bien escrito</p>
-  </div>
-  <!--A partir de aquí se despliega la información de los amiibos-->
-  <div *ngIf="show" class="centro">
+<!-- error de not found -->
+<div *ngIf="!isOk" class="notfound">
+  <p class="titulo404">4 0 4 - NOT FOUND</p>
+  <p>Intente con otro amiibo o revise si su nombre está bien escrito</p>
+</div>
 
-  <div class="response" *ngFor="let amiibo of apiResponse.amiibo"  style="color:white;">
+<!--A partir de aquí se despliega la información de los amiibos-->
+<div *ngIf="show" class="centro">
+  <div
+    class="response"
+    *ngFor="let amiibo of apiResponse.amiibo"
+    style="color: white"
+  >
     <!--Personaje del Amiibo-->
-    <p><b>Personaje: </b>{{amiibo.character}}</p>
+    <p><b>Personaje: </b>{{ amiibo.character }}</p>
     <!--Imagen del amiibo-->
     <div>
-      <img src="{{amiibo.image}}">
+      <img src="{{ amiibo.image }}" />
     </div>
     <!--Nombre del amiibo-->
-    <p><b>Nombre del amiibo: </b>{{amiibo.name}}</p>
+    <p><b>Nombre del amiibo: </b>{{ amiibo.name }}</p>
     <!--Serie del amiibo-->
-    <p><b>Serie del amiibo: </b>{{amiibo.amiiboSeries}}</p>
+    <p><b>Serie del amiibo: </b>{{ amiibo.amiiboSeries }}</p>
     <!--Fecha de lanzamiento-->
-    <p><b>Lanzamiento en Australia: </b>{{amiibo.release.au}}</p>
-    <p><b>Lanzamiento en Europa: </b>{{amiibo.release.eu}}</p>
-    <p><b>Lanzamiento en Japón: </b>{{amiibo.release.jp}}</p>
-    <p><b>Lanzamiento en América: </b>{{amiibo.release.na}}</p>
-    <p><b>-----------------------------------------------------------------</b></p>
+    <p><b>Lanzamiento en Australia: </b>{{ amiibo.release.au }}</p>
+    <p><b>Lanzamiento en Europa: </b>{{ amiibo.release.eu }}</p>
+    <p><b>Lanzamiento en Japón: </b>{{ amiibo.release.jp }}</p>
+    <p><b>Lanzamiento en América: </b>{{ amiibo.release.na }}</p>
+    <p>
+      <b>-----------------------------------------------------------------</b>
+    </p>
   </div>
-  </div>
+</div>
 
-
+<!-- esto es con el componente display -->
+<div>
+  <display *ngIf="show"  urlApi={{this.urlApi}}></display>
+</div>

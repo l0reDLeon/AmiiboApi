@@ -1,0 +1,26 @@
+<div *ngIf="show" class="centro">
+  <div
+    class="response"
+    *ngFor="let amiibo of apiResponse.amiibo"
+    style="color: white"
+  >
+    <!--Personaje del Amiibo-->
+    <p><b>Personaje: </b>{{ amiibo.character }}</p>
+    <!--Imagen del amiibo-->
+    <div>
+      <img src="{{ amiibo.image }}" />
+    </div>
+    <!--Nombre del amiibo-->
+    <p><b>Nombre del amiibo: </b>{{ amiibo.name }}</p>
+    <!--Serie del amiibo-->
+    <p><b>Serie del amiibo: </b>{{ amiibo.amiiboSeries }}</p>
+    <!--Fecha de lanzamiento-->
+    <p><b>Lanzamiento en Australia: </b>{{ amiibo.release.au }}</p>
+    <p><b>Lanzamiento en Europa: </b>{{ amiibo.release.eu }}</p>
+    <p><b>Lanzamiento en Japón: </b>{{ amiibo.release.jp }}</p>
+    <p><b>Lanzamiento en América: </b>{{ amiibo.release.na }}</p>
+    <p>
+      <b>-----------------------------------------------------------------</b>
+    </p>
+  </div>
+</div>

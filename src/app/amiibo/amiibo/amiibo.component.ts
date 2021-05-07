@@ -1,7 +1,6 @@
 import { ApiModels } from "src/app/models/myApimodels";
 import { Component, OnInit } from '@angular/core';
 
-
 interface Release {
   au?: string;
   eu?: string;
@@ -48,9 +47,9 @@ export class AmiiboComponent implements OnInit {
       console.error(err);
       this.isOk = false;
     });
-    console.log("callApi dice: Se llamó a la api");
-    console.log(`callApi dice: personaje = ${this.urlApi}`);
-    console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`);
+    // console.log("callApi dice: Se llamó a la api");
+    // console.log(`callApi dice: personaje = ${this.urlApi}`);
+    // console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`);
     // if(this.apiResponse==undefined || this.apiResponse==null) alert("No se encontró el Amiibo");
   }
 
@@ -60,29 +59,25 @@ export class AmiiboComponent implements OnInit {
       this.apiResponse=data;
     })
     .catch(error => console.log("ERROR"));
-    console.log("callApi dice: Se llamó a la api");
-    console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/`);
+    // console.log("callApi dice: Se llamó a la api");
+    // console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/`);
   }
 
   send(){
+    // this.show=false;
     this.isOk=true;
     var nombre = (<HTMLInputElement>document.getElementById("nombreAmiibo")).value;
     this.urlApi = nombre;
-   console.log("nombre: "+nombre);
+    console.log(nombre);
+    this.show=true;
 
+    console.log(this.show);
     if(nombre == "" || nombre==null || nombre==undefined)
     {
       alert("Debe ingresar el nombre del amiibo que desea buscar");
     }
-    else {
-      this.callApi();
-      console.log("Data: "+this.apiResponse);
-      this.show=true;
-
-    }
-
     this.urlApi='';
-    console.log(`send dice: Url= ${this.urlApi}`);
+    this.show=true;
   }
 
   sendAll(){
