@@ -43,7 +43,7 @@ export class DisplayComponent{
     console.log(this.nombre);
   }
 
-  ngOnChanges() {
+  ngOnChanges() {//esto no está bien implementado
     if(this.nombre){
       console.log("Cargó el display v2");
       this.callApi();
@@ -51,6 +51,7 @@ export class DisplayComponent{
       console.log(this.nombre + 'v2');
     }
   }
+
   //https://dev.to/nickraphael/ngonchanges-best-practice-always-use-simplechanges-always-1feg
 
   // ionViewWillEnter(){
