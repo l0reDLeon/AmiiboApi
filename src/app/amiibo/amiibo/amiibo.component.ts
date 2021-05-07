@@ -24,65 +24,78 @@ interface AmiiboViewModel{
 
 export class AmiiboComponent implements OnInit {
   constructor() { }
-  apiResponse:ApiModels.RootObject=undefined;
-  Amiibo:AmiiboViewModel[];
+  // apiResponse:ApiModels.RootObject=undefined;
+  // Amiibo:AmiiboViewModel[] = [];
   urlApi:string;
 
-
-  show: boolean = false;
+  show: boolean = true;
   isOk:boolean = true;
-
-
+  nombre: string;
   ngOnInit(){
-    this.urlApi = '';
+
+  }
+  // https://stackoverflow.com/questions/46939808/how-to-do-onkeypress-in-angular-4
+
+
+
+send(){
+  // this.show = false;
+   this.nombre = this.urlApi;
+   console.log(this.nombre);
+
+  if(this.nombre == "" || this.nombre==null || this.nombre==undefined)
+  {
+    this.show = false;
+    alert("Debe ingresar el nombre del amiibo que desea buscar");
+  }else{
+     this.show = true;
   }
 
-  callApi(){
-    fetch(`https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`).then(response => response.json())
-    .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
-      this.apiResponse=data;
-      if(data.amiibo==undefined)
-        this.isOk=false;
-    }).catch(function(err) {
-      console.error(err);
-      this.isOk = false;
-    });
-    // console.log("callApi dice: Se llamó a la api");
-    // console.log(`callApi dice: personaje = ${this.urlApi}`);
-    // console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`);
-    // if(this.apiResponse==undefined || this.apiResponse==null) alert("No se encontró el Amiibo");
-  }
+  // this.show = true;
+}
+  // callApi(){
+  //   fetch(`https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`).then(response => response.json())
+  //   .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
+  //     this.apiResponse=data;
+  //     if(data.amiibo==undefined)
+  //       this.isOk=false;
+  //   }).catch(function(err) {
+  //     console.error(err);
+  //     this.isOk = false;
+  //   });
+  //   // console.log("callApi dice: Se llamó a la api");
+  //   // console.log(`callApi dice: personaje = ${this.urlApi}`);
+  //   // console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/?character=${this.urlApi}`);
+  //   // if(this.apiResponse==undefined || this.apiResponse==null) alert("No se encontró el Amiibo");
+  // }
 
-  callApiAll(){
-    fetch(`https://www.amiiboapi.com/api/amiibo/`).then(response => response.json())
-    .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
-      this.apiResponse=data;
-    })
-    .catch(error => console.log("ERROR"));
-    // console.log("callApi dice: Se llamó a la api");
-    // console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/`);
-  }
+  // callApiAll(){
+  //   fetch(`https://www.amiiboapi.com/api/amiibo/`).then(response => response.json())
+  //   .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
+  //     this.apiResponse=data;
+  //   })
+  //   .catch(error => console.log("ERROR"));
+  //   // console.log("callApi dice: Se llamó a la api");
+  //   // console.log(`callApi dice: Url= https://www.amiiboapi.com/api/amiibo/`);
+  // }
 
-  send(){
-    // this.show=false;
-    this.isOk=true;
-    var nombre = (<HTMLInputElement>document.getElementById("nombreAmiibo")).value;
-    this.urlApi = nombre;
-    console.log(nombre);
-    this.show=true;
+  // send(){
+  //   // this.show=false;
+  //   this.isOk=true;
+  //   console.log(this.urlApi);
 
-    console.log(this.show);
-    if(nombre == "" || nombre==null || nombre==undefined)
-    {
-      alert("Debe ingresar el nombre del amiibo que desea buscar");
-    }
-    this.urlApi='';
-    this.show=true;
-  }
+  //   this.show=true;
 
-  sendAll(){
-    this.isOk=true;
-    (<HTMLInputElement>document.getElementById("nombreAmiibo")).value="";
-    this.callApiAll();
-  }
+  //   console.log(this.show);
+  //   if(this.urlApi == "" || this.urlApi==null || this.urlApi==undefined)
+  //   {
+  //     alert("Debe ingresar el nombre del amiibo que desea buscar");
+  //   }
+  // }
+
+  // sendAll(){
+  //   this.isOk=true;
+  //   (<HTMLInputElement>document.getElementById("nombreAmiibo")).value="";
+  //   this.callApiAll();
+  // }
 }

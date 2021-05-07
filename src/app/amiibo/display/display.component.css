@@ -1,3 +1,16 @@
 .centro{
   text-align: center;
 }
+.main{
+  background-color:black;
+}
+
+.notfound{
+  background-color: #ff4554;
+  text-align:center;
+  color:lavender;
+}
+
+.titulo404{
+  font-size: x-large;
+}

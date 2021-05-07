@@ -21,10 +21,10 @@
         height: 40px;
         width: 30%;
         margin-left: auto;
-        margin-right: auto;
-      "
+        margin-right: auto;"
       required
       placeholder="Escribe un nombre"
+      [(ngModel)]="urlApi"
     />
     <br /><br />
 
@@ -33,16 +33,15 @@
       <button class="btn btn-outline-success" (click)="send()" style="font-size: x-large">
         Buscar Amiibo
       </button>
-      Ó
+      <!-- Ó
       <button
         class="btn btn-outline-warning"
         (click)="sendAll()"
         style="font-size: x-large"
       >
         Mostrar todos
-      </button>
+      </button> -->
     </div>
-
     <br />
   </div>
 </div>
@@ -53,35 +52,7 @@
   <p>Intente con otro amiibo o revise si su nombre está bien escrito</p>
 </div>
 
-<!--A partir de aquí se despliega la información de los amiibos-->
-<div *ngIf="show" class="centro">
-  <div
-    class="response"
-    *ngFor="let amiibo of apiResponse.amiibo"
-    style="color: white"
-  >
-    <!--Personaje del Amiibo-->
-    <p><b>Personaje: </b>{{ amiibo.character }}</p>
-    <!--Imagen del amiibo-->
-    <div>
-      <img src="{{ amiibo.image }}" />
-    </div>
-    <!--Nombre del amiibo-->
-    <p><b>Nombre del amiibo: </b>{{ amiibo.name }}</p>
-    <!--Serie del amiibo-->
-    <p><b>Serie del amiibo: </b>{{ amiibo.amiiboSeries }}</p>
-    <!--Fecha de lanzamiento-->
-    <p><b>Lanzamiento en Australia: </b>{{ amiibo.release.au }}</p>
-    <p><b>Lanzamiento en Europa: </b>{{ amiibo.release.eu }}</p>
-    <p><b>Lanzamiento en Japón: </b>{{ amiibo.release.jp }}</p>
-    <p><b>Lanzamiento en América: </b>{{ amiibo.release.na }}</p>
-    <p>
-      <b>-----------------------------------------------------------------</b>
-    </p>
-  </div>
-</div>
-
 <!-- esto es con el componente display -->
-<div>
-  <display *ngIf="show"  urlApi={{this.urlApi}}></display>
+<div >
+  <display nombre={{nombre}}></display>
 </div>

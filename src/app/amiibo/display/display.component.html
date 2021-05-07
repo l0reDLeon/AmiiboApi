@@ -1,4 +1,9 @@
-<div *ngIf="show" class="centro">
+<div *ngIf="!isOk" class="notfound">
+  <p class="titulo404">4 0 4 - NOT FOUND</p>
+  <p>Intente con otro amiibo o revise si su nombre está bien escrito</p>
+</div>
+
+<div class="centro" *ngIf="apiResponse!=undefined">
   <div
     class="response"
     *ngFor="let amiibo of apiResponse.amiibo"

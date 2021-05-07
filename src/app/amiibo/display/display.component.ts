@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import ApiModels from 'src/app/models/myApimodels';
 
 interface Release {
@@ -22,31 +22,54 @@ interface AmiiboViewModel{
   styleUrls: ['./display.component.css']
 })
 
-export class DisplayComponent implements OnInit {
+export class DisplayComponent{
   constructor() { }
-  show:boolean=true;
 
   ///////
-  apiResponse:ApiModels.RootObject;
-  Amiibo:AmiiboViewModel[];
+  apiResponse:ApiModels.RootObject = undefined;
 
   @Input()
-  urlApi:string;
+  nombre:string;
 
   isOk:boolean = true;
 
-  async ngOnInit(){
+  ngOnInit(){
+    // this.show = false;
     console.log("Cargó el display");
-    await this.callApi();
+    if(this.apiResponse!=undefined){
+      this.callApi();
+    }
     console.log("Ya se uso callApi");
+    console.log(this.nombre);
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ngOnChanges() {
+    if(this.nombre){
+      console.log("Cargó el display v2");
+      this.callApi();
+      console.log("Ya se uso callApi v2");
+      console.log(this.nombre + 'v2');
+    }
+  }
+  //https://dev.to/nickraphael/ngonchanges-best-practice-always-use-simplechanges-always-1feg
 
+  // ionViewWillEnter(){
+  //   console.log("Cargó el display");
+  //   this.callApi();
+  //   console.log("Ya se uso callApi");
+  //   console.log(this.nombre);
+  // }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   async callApi(){
-    const data = await fetch(`https://www.amiiboapi.com/api/amiibo/?character=mario`);
+    // const data = await fetch(`https://www.amiiboapi.com/api/amiibo/?character=mario`);
+    this.isOk=true;
+    const data = await fetch(`https://www.amiiboapi.com/api/amiibo/?character=${this.nombre}`);
     const response:ApiModels.RootObject = await data.json();
     this.apiResponse = response;
+    if(this.apiResponse.amiibo==undefined){
+        this.isOk=false;
+    };
     console.log(this.apiResponse);
     // .then(response => response.json())
     // .then((data : ApiModels.RootObject) => {//aquí data es un arreglo
@@ -59,36 +82,4 @@ export class DisplayComponent implements OnInit {
     // });
   }
 
-  callApiAll(){
-    fetch(`https://www.amiiboapi.com/api/amiibo/`).then(response => response.json())
-    .then((data : ApiModels.RootObject) => {
-      this.apiResponse=data;
-    })
-    .catch(error => console.log("ERROR"));
-  }
-
-  // send(){
-  //   this.isOk=true;
-  //   var nombre = (<HTMLInputElement>document.getElementById("nombreAmiibo")).value;
-  //   this.urlApi = nombre;
-
-  //   if(nombre == "" || nombre==null || nombre==undefined)
-  //   {
-  //     alert("Debe ingresar el nombre del amiibo que desea buscar");
-  //   }
-  //   else {
-  //     this.callApi();
-  //     console.log("Data: "+this.apiResponse.amiibo[0].name);
-  //     this.show=true;
-
-  //   }
-
-  //   this.urlApi='';
-  // }
-
-  sendAll(){
-    this.isOk=true;
-    (<HTMLInputElement>document.getElementById("nombreAmiibo")).value="";
-    this.callApiAll();
-  }
 }
